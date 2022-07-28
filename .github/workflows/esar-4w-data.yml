@@ -2,7 +2,7 @@ name: scraper-esar-4w
 
 on:
   schedule:
-    - cron: '*/10 * * * *' # runs everyday every 45min : min hour day(month) month day(week)
+    - cron: '0 9 * * MON' # runs everyday every 45min : min hour day(month) month day(week)
 
 jobs:
   build:
