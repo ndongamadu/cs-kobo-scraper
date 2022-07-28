@@ -1,2 +1,2 @@
 # cs-kobo-scraper
-Automation of our kobo data
+Automation of Collective Service kobo data>
