@@ -6,11 +6,11 @@ import os
 base_url = "https://kc.humanitarianresponse.info/api/v1"
 forms_url = "https://kc.humanitarianresponse.info/api/v1/data"
 
+countriesArr = pd.read_csv('countries_list_iso.csv')
+
 
 def getDataById(formID):
-    CS_KOBO_TOKEN = os.environ.get("CS_KOBO_TOKEN")
-    print(CS_KOBO_TOKEN)
-    
+    CS_KOBO_TOKEN = os.environ.get("CS_KOBO_TOKEN")    
     headers = {"Authorization": CS_KOBO_TOKEN}
     url = base_url +"/data/"+formID
     kobo = requests.get(url, headers=headers)
@@ -33,6 +33,9 @@ def getDataById(formID):
         json.dump(data,f)
     return 
 
+def replaceValues(val, to_rep, rep_par):
+    return str(val).replace(to_rep, rep_par)
+
 
 def getRegional4WData():
     regional_4W_id= "1023157"
@@ -44,6 +47,14 @@ def getRegional4WData():
         jsonData = json.load(f)
     
     df = pd.json_normalize(jsonData["data"],"Reporting/repeat", data_headers)
+    df = df.merge(countriesArr[["NAME", "ISO3"]], right_on="NAME", left_on="Reporting/repeat/countries")
+
+    for col in ["Reporting/repeat/activity_cat","Reporting/repeat/population"]:
+        df[col] = df[col].apply(replaceValues, args=(" ", "|"))
+
+    for col in ["Reporting/repeat/health", "Reporting/repeat/humanitarian", "Reporting/repeat/activity_cat", "Reporting/repeat/population"]:
+        df[col] = df[col].apply(replaceValues, args=("_", " "))
+
     df.to_csv("data_regional4W.csv")
     return 
 
