@@ -25,7 +25,7 @@ jobs:
       - name: execute py script # run run.py
         env: 
           CS_KOBO_TOKEN: ${{ secrets.CS_KOBO_TOKEN }}
-        run: python run.py
+        run: python scraper_regional_4w.py
           
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v4
