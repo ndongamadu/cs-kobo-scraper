@@ -1,8 +1,10 @@
-name: scraper-esar-4w
+# scrape regional 4w and kenya 4w vax data
+
+name: kobo-data-scraper
 
 on:
   schedule:
-    - cron: '0 9 * * *' # runs everyday every 45min : min hour day(month) month day(week)
+    - cron: '0/20 * * *' # runs everyday every 45min : min hour day(month) month day(week)
 
 jobs:
   build:
@@ -25,7 +27,7 @@ jobs:
       - name: execute py script # run run.py
         env: 
           CS_KOBO_TOKEN: ${{ secrets.CS_KOBO_TOKEN }}
-        run: python scraper_regional_4w.py
+        run: python run.py
           
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v4
