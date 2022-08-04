@@ -4,7 +4,7 @@ name: kobo-data-scraper
 
 on:
   schedule:
-    - cron: '*/20 * * *' # runs everyday every 45min : min hour day(month) month day(week)
+    - cron: '*/20 * * * *' # runs everyday every 45min : min hour day(month) month day(week)
 
 jobs:
   build:
