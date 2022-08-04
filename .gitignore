@@ -3,3 +3,4 @@ data/data_*.json
 scraper_kenya_4w.py 
 scraper_regional_4w.py 
 .github/workflows/kenya-4w-vax.yml
+.DS_Store
