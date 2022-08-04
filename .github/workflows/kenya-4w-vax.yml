@@ -2,7 +2,7 @@ name: scraper-esar-4w
 
 on:
   schedule:
-    - cron: '0 9 * * *' # runs everyday every 45min : min hour day(month) month day(week)
+    - cron: '0 8 * * *' # runs everyday every 45min : min hour day(month) month day(week)
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       - name: execute py script # run run.py
         env: 
           CS_KOBO_TOKEN: ${{ secrets.CS_KOBO_TOKEN }}
-        run: python run.py
+        run: python scraper_kenya_4w.py
           
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v4
